@@ -17,35 +17,15 @@
 
 
 	<link href='{% static 'css/manager.css' %}' rel='stylesheet' type='text/css'>
+  <link href='{% static 'css/tomato.css' %}' rel='stylesheet' type='text/css'>
 
 
     <audio>
 	      <source src="http://www.myinstants.com/media/sounds/alert-hq.mp3"></source>
     </audio>
 
-	<style type="text/css" media="screen">
-	.carousel-item {
-		height: 65vh;
-		min-height: 350px;
-		background: no-repeat center center scroll;
-		-webkit-background-size: cover;
-		-moz-background-size: cover;
-		-o-background-size: cover;
-		background-size: cover;
-	}
 
-
-body{
-  text-align: center;
-  margin: 30 auto;
-  font-family: Montserrat;
-  background-color: #22262B;
-  color: white;
-}
-
-
-
-</style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
 </head>
 
@@ -89,7 +69,7 @@ body{
 
 	<!-- Page Content -->
 	<section class="py-5">
-		<div class="container">
+		<div class="container" style="text-align: center;">
     <div class='clock' id='grad'>
       <p class='title'>Session</p>
       <p class='timer'>25</p>
@@ -133,7 +113,24 @@ body{
 
 
 		</div>
+
+
+
 	</section>
+
+
+  
+
+<div class="container_tomato">
+  <div id="tomato">
+    <div id="tomatoTop"></div>
+    <div id="tomatoFill"></div>
+  </div>
+</div>
+
+
+
+
 
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
 	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>

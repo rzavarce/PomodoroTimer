@@ -13,6 +13,8 @@ $(document).ready(function(){
 
  $('.timer').html(minutes + ":00");
   
+
+ //FUNCTION COUNTDOWN CONTROLLER 
  function countdown(){
     
     
@@ -65,8 +67,12 @@ $(document).ready(function(){
   });
    $('#minusCount').click(function(){
      if(pause === false){
-    if(countTime > 1){countTime--; $("#count").html(countTime); $(".timer").html(countTime + ":00");        $('.title').text('Session');
-}
+        if(countTime > 1){
+          countTime--; 
+          $("#count").html(countTime); 
+          $(".timer").html(countTime + ":00");        
+          $('.title').text('Session');
+        }
        //reset times
        seconds = 0;
        minutes = countTime;
@@ -84,18 +90,87 @@ $(document).ready(function(){
     }
   });
   
-  $('.clock').click(function(){
+
+//FUNCTION START/STOP POMODORO
+  $('#pomodoro_controller').click(function(){
     
-    //begin countdown function, call it every sec
-   if(pause === false){
+   if(pause === false && $(this).is(':checked')){
      counting = setInterval(countdown, 1000);
      pause = true;
    }
-   else if(pause === true){
+   else if(pause === true && !$(this).is(':checked')){
      clearInterval(counting);
      pause = false;
    }
   });
+
+
+  //FUNCTION ACTIVE POMODORO IF A TASK PENDINT EXISTS
+  $('#id_task').change(function(){
+    console.log($('#id_task').val());
+   if($('#id_task').val()=="Null"){
+      
+      $("#pomodoro_controller").prop('checked', false);
+      $(".pomodoro_controller_content").hide( "slow" );
+
+      if(countTime > 1){
+          $("#count").html(countTime); 
+          $(".timer").html(countTime + ":00");        
+          $('.title').text('Session');
+        }
+       //reset times
+       seconds = 0;
+       minutes = countTime;
+
+       if(pause === true && !$(this).is(':checked')){
+         clearInterval(counting);
+         pause = false;
+       }
+
+
+      console.log('ssssssss');
+
+   }else{
+      console.log('zzzzzzz');
+      $(".pomodoro_controller_content").show( "slow" );
+   }
+  });
+
+
+//FUNCTION API TASK CONTROLER
+  function task_update() {
+    $.ajax({
+      url : "http://localhost:8000/tasks",
+      dataType: "json",
+      success : function (data) {
+          
+
+          task_active = $("#id_task").val()
+
+          var firstOption = $("#id_task option:first-child");
+          $("#id_task").empty().append(firstOption);
+
+          $.each(data['results'], function(i, item) {
+              console.log(item);
+
+              if(item.id == task_active){
+                $("#id_task").append('<option value="'+ item.id +'" selected>'+ item.tsk_title +'</option>')
+              }else{
+                $("#id_task").append('<option value="'+ item.id +'">'+ item.tsk_title +'</option>')
+              }
+
+              
+          });
+
+
+
+        }
+     });
+  }
+  setInterval(task_update, 3000);
+
+
+
 });
 
 

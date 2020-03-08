@@ -25,6 +25,9 @@ from tasks import views as tasks
 
 router = routers.DefaultRouter()
 router.register(r'users', tasks.UserViewSet)
+router.register(r'tasks', tasks.TaskViewSet)
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -36,7 +39,7 @@ urlpatterns = [
 
     url(r'Contact/', tasks.Contacts, name='contact'),
 
-    path('api-task/', tasks.TaskViewSet, name='api_task'),
+    #path('api-task/', tasks.TaskViewSet, name='api_task'),
 
     #url(r'api-user', include(router.urls), name='api_user'),
 

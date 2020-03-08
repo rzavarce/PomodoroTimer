@@ -27,15 +27,12 @@ def Index(request):
 
 def PodomoroManager(request):
 
-	return render(request, 'tasks/manager.html', {'bikes': 'is_mobile'})
+    context={}
+    context['tasks'] = Task.objects.filter(tsk_status=0) 
 
-	#client = Client.objects.filter(users__id=request.user.id) 
-	#bikes = Bike.objects.filter(client__owner = request.user, device__status=0)
+    print(context['tasks'])
 
-	#return render(request, 'templates/index.html', {'bikes': 'is_mobile'})
-
-
-
+    return render(request, 'tasks/manager.html', context) 
 
 
 def Contacts(request):

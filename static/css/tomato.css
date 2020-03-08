@@ -1,0 +1,117 @@
+.container_tomato {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
+#tomato {
+  background: #FF6347;
+  height: 50px;
+  width: 100px;
+  margin-top: 400px;
+  margin-bottom: 400px;
+  border-radius: 0 0 50px 50px;
+  position: relative;
+  transition: all .3s ease-in-out;
+  transform: scale(6);
+}
+
+
+
+#tomato::before {
+  content: "";
+  width: 32px;
+  height: 32px;
+  border: 1px solid #FF6347;
+  background: #FF6347;
+  position: absolute;
+  border-radius: 0 32px 0 0;
+  top: -32px;
+  right: 0;
+  transition: all .2s ease-in-out;
+}
+
+#tomato::after {
+  content: "";
+  width: 32px;
+  height: 32px;
+  border: 1px solid #FF6347;
+  background: #FF6347;
+  position: absolute;
+  border-radius: 32px 0 0 0;
+  top: -32px;
+  transition: all .2s ease-in-out;
+}
+
+#tomatoFill {
+  width: 36px;
+  height: 16px;
+  background: #FF6347;
+  position: absolute;
+  top: -16px;
+  left: 32px;
+  transition: all .2s ease-in-out;
+}
+
+#tomatoFill::before {
+  content: "";
+  width: 18px;
+  height: 16px;
+  background: #FF6347;
+  position: absolute;
+  border-radius: 0 16px 0 0;
+  top: -16px;
+  transition: all .2s ease-in-out;
+}
+
+#tomatoFill::after {
+  content: "";
+  width: 18px;
+  height: 16px;
+  background: #FF6347;
+  position: absolute;
+  border-radius: 16px 0 0 0;
+  top: -16px;
+  right: 0;
+  transition: all .2s ease-in-out;
+}
+
+#tomatoTop {
+  background: #A8B848;
+  height: 16px;
+  width: 16px;
+  border-radius: 16px 0 16px 0;
+  position: absolute;
+  transform: rotateZ(135deg);
+  top: -16px;
+  z-index: 1;
+  left: 41px;
+  transition: all .2s ease-in-out;
+}
+
+#tomatoTop::before {
+  content: "";
+  background: #A8B848;
+  height: 16px;
+  width: 16px;
+  border-radius: 16px 0 16px 0;
+  position: absolute;
+  z-index: 1;
+  transform: rotateZ(90deg);
+  top: 12px;
+  transition: all .2s ease-in-out;
+}
+
+#tomatoTop::after {
+  content: "";
+  background: #A8B848;
+  height: 16px;
+  width: 16px;
+  border-radius: 16px 0 16px 0;
+  position: absolute;
+  z-index: 1;
+  transform: rotateZ(90deg);
+  top: -2px;
+  right: 13px;
+  transition: all .2s ease-in-out;
+}

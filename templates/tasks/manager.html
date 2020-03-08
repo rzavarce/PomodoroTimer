@@ -9,6 +9,14 @@
 
 	<!-- Page Content -->
 	<section class="py-5">
+    <div class="container" style="text-align: center;">
+      <select name="task" id="id_task" class="custom-select">
+        <option value="Null"> Select a Task </option>
+        {% for task in tasks %}
+         <option value="{{task.id}}">{{task.tsk_title|capfirst}}</option>
+        {% endfor %}
+      </select>
+    </div>  
 		<div class="container" style="text-align: center;">
       <div class='clock' id='grad'>
         <p class='title'>Session</p>

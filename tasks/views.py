@@ -14,6 +14,8 @@ from .serializers import TaskSerializer
 
 from django.contrib.auth.models import User
 
+import json
+
 # Create your views here.
 
 
@@ -38,6 +40,14 @@ def PodomoroManager(request):
     return render(request, 'tasks/manager.html', context) 
 
 
+def TaskList(request):
+
+    context={}
+    context['tasks'] = Task.objects.all().values('tsk_title', 'tsk_description', 'tsk_status', 'tsk_assignted_time', 'tsk_created_date')
+
+    return render(request, 'tasks/task_list.html', context) 
+
+
 def Contacts(request):
 
 	return render(request, 'tasks/contacts.html', {'bikes': 'is_mobile'})
@@ -54,41 +64,6 @@ class TaskViewSet(viewsets.ModelViewSet):
     ordering_fields = ('id',)
     ordering = ('id',)
 
-
-'''
-
-class TaskDetailsViewSet(APIView, pk):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
-
-
-    serializer_class = TaskSerializer
-    
-
-    try:
-        queryset = Config.objects.get(pk=pk)
-    except Serie.DoesNotExist:
-        return HttpResponse(status=404)
-
-
-@csrf_exempt
-def TaskDetails(request, pk):
-    """
-    Retrieve, update or delete a serie.
-    """
-    try:
-        config = Config.objects.get(pk=pk)
-    except Config.DoesNotExist:
-        return HttpResponse(status=404)
-
-    if request.method == 'GET':
-        serializer = TaskSerializer(config)
-        return JSONResponse(serializer.data)
-
-
-
-'''
 
 
 class UserViewSet(viewsets.ModelViewSet):

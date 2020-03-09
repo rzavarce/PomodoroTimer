@@ -34,7 +34,12 @@ urlpatterns = [
 
     url(r'^$', tasks.Index, name='index'),
 
-    url(r'Start/', tasks.PodomoroManager, name='pomodoro_manager'),
+    url(r'Manager/', tasks.PodomoroManager, name='pomodoro_manager'),
+
+    url(r'TaskList/', tasks.TaskList, name='task_list'),
+
+
+
 
     url(r'Contact/', tasks.Contacts, name='contact'),
 

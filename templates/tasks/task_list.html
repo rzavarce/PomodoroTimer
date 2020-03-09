@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block content %}
+
+<!-- Page Content -->
+	<section class="py-5">
+
+
+
+		<div class="container">
+
+
+			<table id="task_list" class="display" style="width:100%; text-align: center">
+		        <thead>
+		            <tr style="color: red">
+		                <td>Title</td>
+		                <td>Description</td>
+		                <td>Status</td>
+		                <td>Assignted Time</td>
+		                <td>Created Date</td>
+		            </tr>
+		        </thead>
+				<tbody>
+
+					{% for task in tasks %}
+        
+        
+		            <tr>
+		                <td>{{task.tsk_title|capfirst}}</td>
+		                <td>{{task.tsk_description}}</td>
+		                <td>{% if task.tsk_status == 1 %} 
+		                		Done
+							{% else %}
+								Pending	
+							{% endif %}
+		                	</td>
+		                <td>{{task.tsk_assignted_time}}</td>
+		                <td>{{task.tsk_created_date}}</td>
+		            </tr>
+
+		            {% endfor %}
+
+
+		        </tbody>    
+		
+		    </table>
+
+		</div>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+	       var json={{ tasks | safe }};
+	       var data= json["data"];
+	       var json2 = JSON.stringify(data);
+	
+	       $('#task_list').DataTable({
+	         "ajax": json  
+	       });
+		});
+
+
+
+	</script>
+
+	</section>
+
+
+{% endblock %}

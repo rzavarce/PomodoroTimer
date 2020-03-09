@@ -2,13 +2,14 @@ $(document).ready(function(){
 
  var audio = $("audio")[0]; 
   
- var countTime = 25;
- var breakTime = 5;
- var longBreakTime = 5;
+ var countTime = 0;
+ var breakTime = 0;
+ var pomodoros_laps = 0
+ var longBreakTime = 0;
 
  var pause = false;
  var seconds = 0;
- var minutes = 25;
+ var minutes = 0;
 
  var counting;
 
@@ -25,16 +26,24 @@ $(document).ready(function(){
     }
    
    if(minutes === 0 && seconds === 0){
+
       if($('.title').text() === 'Pomodoro'){
-        $('.title').text('Break');
-        minutes = breakTime;
-        $('.timer').html(minutes + ":0" + seconds);
+        pomodoros_laps++;
+        if(pomodoros_laps<3){
+          $('.title').text('Break');
+          minutes = breakTime;
+          $('.timer').html(minutes + ":0" + seconds);
+        }else{
+          $('.title').text('Long Break');
+          minutes = longBreakTime;
+          $('.timer').html(minutes + ":0" + seconds);
+          pomodoros_laps=0;
+        }
       }
-      
       else if($('.title').text() === 'Break'){
-        $('.title').text('Long Break');
-        minutes = longBreakTime;
-        $('.timer').html(minutes + ":0" + seconds);
+          $('.title').text('Pomodoro');
+          minutes = countTime;
+          $('.timer').html(minutes + ":0" + seconds);
       }
       else if($('.title').text() === 'Long Break'){
         $('.title').text('Pomodoro');

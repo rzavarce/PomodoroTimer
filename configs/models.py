@@ -14,11 +14,11 @@ class Config(models.Model):
 
 	cnf_title = models.CharField(max_length=150, verbose_name=_('Nickname'), blank=True, null=True)
 
-	cnf_lap_time = models.PositiveIntegerField(verbose_name=_('Pomodoros Time'))
+	cnf_lap_time = models.PositiveIntegerField(verbose_name=_('Pomodoros Time'), default=25)
 
-	cnf_time_short_brake = models.PositiveIntegerField(verbose_name=_('Time Short Brake'),)
+	cnf_time_short_brake = models.PositiveIntegerField(verbose_name=_('Time Short Brake'), default=5)
 
-	cnf_time_long_brake = models.PositiveIntegerField(verbose_name=_('Time Long Brake'),)
+	cnf_time_long_brake = models.PositiveIntegerField(verbose_name=_('Time Long Brake'), default=10)
 
 	cnf_created_date = models.DateTimeField(default=timezone.now, verbose_name=_('Creation Date'))
 	

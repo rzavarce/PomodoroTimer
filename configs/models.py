@@ -6,10 +6,6 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-
-STATUS = ((0,_('Pending')),(1,_('Done')))
-
-
 class Config(models.Model):
 
 	cnf_title = models.CharField(max_length=150, verbose_name=_('Nickname'), blank=True, null=True)
@@ -26,9 +22,6 @@ class Config(models.Model):
 
 	cnf_creator = models.ForeignKey(User, verbose_name=_('Creator'), on_delete=models.CASCADE)
 
-
-
-
 	
 	def __str__(self):
 		#return str(self.cnf_lap_time) + " - " + str(self.cnf_time_short_brake) + " - " + str(self.cnf_time_long_brake)
@@ -38,8 +31,6 @@ class Config(models.Model):
 	class Meta:
 	    verbose_name = _('Config')
 	    verbose_name_plural = _('Configs')
-
-
 
 
 

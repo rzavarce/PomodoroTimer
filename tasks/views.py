@@ -56,9 +56,7 @@ def Contacts(request):
 
 
 def ContactSendEmail(request):
-
-fromJs = request.body
-
+    
     print(request.POST)
 
     name = request.POST['name']

@@ -48,6 +48,7 @@ THIRD_PARTY_APPS = (
 LOCAL_APPS = (
     'tasks',
     'configs',
+    'contacts',
 
         
 )
@@ -104,7 +105,7 @@ DATABASES = {
 DATABASES = {
 
     'default': {
-        'NAME': 'MomotosDB',
+        'NAME': 'PomodoroDB',
         'ENGINE': 'django.db.backends.mysql',
         'STORAGE_ENGINE': 'InnoDB',
         'USER': 'root',

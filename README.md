@@ -13,14 +13,13 @@ or Download:
 	python3 manage.py runserver
 
 
-<b>Description:</b><br>
+# Description:
 
-Pomodoro Timer is in Manager page.
-Task Grid is in Task List page.
-Backend in Admin page.
-I used Bootstrap 4, Django 2.15, SQLlite, Rest/API Framework, Jquery And Other Libs.
-I generate the translation setting (Incomplete).
-I develoment a contact page to send email to the admin user too.
-Extends Templete is used in alls User Interface.
-Etc.
-
+ - Pomodoro Timer is in Manager page. 
+ - Task Grid is in Task List page.
+ - Backend in Admin page. 
+ - I used Bootstrap 4, Django 2.15, SQLlite, Rest/API Framework, Jquery And Other Libs.`enter code here`
+ - I generate the translation setting (Incomplete). 
+ - I develoment a contact page to send email to.
+ - The admin user too. Extends Templete is used in alls User Interface.
+   Etc.

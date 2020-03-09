@@ -39,9 +39,9 @@ urlpatterns = [
     url(r'TaskList/', tasks.TaskList, name='task_list'),
 
 
-
-
     url(r'Contact/', tasks.Contacts, name='contact'),
+
+    url(r'ContactSendEmail/', tasks.ContactSendEmail, name='send_email'),
 
     url(r'^', include(router.urls))
 

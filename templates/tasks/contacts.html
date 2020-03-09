@@ -15,7 +15,8 @@
                 <div class="card-header bg-primary text-white"><i class="fa fa-envelope"></i> Contact us.
                 </div>
                 <div class="card-body">
-                    <form>
+                    <form method="POST" class="post-form" action="/ContactSendEmail/">{% csrf_token %}
+                    
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter name" required>
@@ -31,6 +32,7 @@
                         </div>
                         <div class="mx-auto">
                         <button type="submit" class="btn btn-primary text-right">Submit</button></div>
+                        <button type="button" onclick="send_contact_fomr();" class="btn btn-primary text-right">Enviar prueba</button></div>
                     </form>
                 </div>
             </div>
@@ -38,7 +40,7 @@
         <div class="col-12 col-sm-4">
             <div class="card bg-light mb-3">
                 <div class="card-header bg-success text-white text-uppercase"><i class="fa fa-home"></i> Address</div>
-                <div class="card-body">
+                <div class="card-body" style="color: black">
                     <p>3 rue des Champs Elysées</p>
                     <p>75008 PARIS</p>
                     <p>France</p>
@@ -52,6 +54,24 @@
     </div>
 </div>
 	</section>
+
+
+<script type="text/javascript">
+    //FUNCTION API TASK CONTROLER
+function send_contact_fomr() {
+  task_active = $("#id_task").val()
+  $.ajax({
+    url : "http://localhost:8000/ContactSendEmail/",
+    dataType: "json",
+    success : function (data) {
+
+        console.log("3333333333");
+
+
+      }
+   });
+}
+</script>
 
 
 {% endblock %}

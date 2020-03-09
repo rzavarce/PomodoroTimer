@@ -48,6 +48,7 @@ THIRD_PARTY_APPS = (
 LOCAL_APPS = (
     'tasks',
     'configs',
+    'contacts',
 
         
 )
@@ -104,7 +105,7 @@ DATABASES = {
 DATABASES = {
 
     'default': {
-        'NAME': 'MomotosDB',
+        'NAME': 'PomodoroDB',
         'ENGINE': 'django.db.backends.mysql',
         'STORAGE_ENGINE': 'InnoDB',
         'USER': 'root',
@@ -200,5 +201,17 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
+
+
+# Email Config
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'pomodoro659@gmail.com'
+EMAIL_HOST_PASSWORD = 'pomodoro2020'
+EMAIL_PORT = 587
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
 
 

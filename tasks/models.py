@@ -18,9 +18,9 @@ class Task(models.Model):
 
 	tsk_description = models.TextField(verbose_name=_('Description'), blank=True, null=True,)
 
-	tsk_config = models.OneToOneField('configs.Config', verbose_name=_('Configuration'), on_delete=models.CASCADE)
+	tsk_config = models.ForeignKey('configs.Config', verbose_name=_('Configuration'), on_delete=models.CASCADE)
 
-	tsk_status = models.CharField(max_length=15, choices=STATUS, verbose_name=_('Status'),)
+	tsk_status = models.PositiveIntegerField(choices=STATUS, verbose_name=_('Status'),)
 
 	tsk_assignted_time = models.PositiveIntegerField(verbose_name=_('Assignated Time'),)
 

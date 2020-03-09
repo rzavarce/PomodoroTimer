@@ -8,7 +8,7 @@ from .models import Config
 
 class ConfigsAdmin(admin.ModelAdmin):
 
-    list_display = ('cnf_lap_time', 'cnf_time_short_brake', 'cnf_time_long_brake', 'cnf_creator',)
+    list_display = ('cnf_title', 'cnf_lap_time', 'cnf_time_short_brake', 'cnf_time_long_brake', 'cnf_creator',)
     list_filter = ('cnf_lap_time', 'cnf_time_short_brake',)
     ordering = ('cnf_creator',)
     search_fields = ('cnf_creator',)    

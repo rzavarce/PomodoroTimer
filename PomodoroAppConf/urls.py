@@ -25,6 +25,9 @@ from tasks import views as tasks
 
 router = routers.DefaultRouter()
 router.register(r'users', tasks.UserViewSet)
+router.register(r'tasks', tasks.TaskViewSet)
+#router.register(r'tasks/{pk}', tasks.TaskDetails)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -33,20 +36,11 @@ urlpatterns = [
 
     url(r'Start/', tasks.PodomoroManager, name='pomodoro_manager'),
 
-
     url(r'Contact/', tasks.Contacts, name='contact'),
-
-    path('api-task/', tasks.TaskViewSet, name='api_task'),
-
-    #url(r'api-user', include(router.urls), name='api_user'),
 
     url(r'^', include(router.urls))
 
 
-
-    #url(r'^', include('tasks.urls')),
-
-    #path('task/', include('tasks.urls')),
 ]
 
 

@@ -1,102 +1,30 @@
+{% extends 'base.html' %}
 {% load static %}
-<!doctype html>
-
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-
-	<title>The HTML5 Herald</title>
-	<meta name="description" content="The HTML5 Herald">
-	<meta name="author" content="SitePoint">
-
-
-	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
-<link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-
-
-	<link href='{% static 'css/manager.css' %}' rel='stylesheet' type='text/css'>
-
-
-    <audio>
-	      <source src="http://www.myinstants.com/media/sounds/alert-hq.mp3"></source>
-    </audio>
-
-	<style type="text/css" media="screen">
-	.carousel-item {
-		height: 65vh;
-		min-height: 350px;
-		background: no-repeat center center scroll;
-		-webkit-background-size: cover;
-		-moz-background-size: cover;
-		-o-background-size: cover;
-		background-size: cover;
-	}
-
-
-body{
-  text-align: center;
-  margin: 30 auto;
-  font-family: Montserrat;
-  background-color: #22262B;
-  color: white;
-}
 
 
 
-</style>
+{% block content %}
 
-</head>
 
-<body>
-
-	<!-- Navigation -->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-		<div class="container">
-			<a class="navbar-brand" href="#">Pomodoro App</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item">
-						<a class="nav-link active" href="/">Home
-							<span class="sr-only">(current)</span>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="/Start/">Manager</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="/admin/">Admin</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="/Contact/">Contact</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-
-	<header>
-		<div class="container conteiner_manager">
-			<h1 class="font-weight-light">Pomodoro Timer</h1>
-			<br>
-			<p class="lead">The Pomodoro Technique will provide a simple tool/process for improving productivity (your own and that of your team members)</p>
-		</div>
-	</header>
 
 	<!-- Page Content -->
 	<section class="py-5">
-		<div class="container">
-    <div class='clock' id='grad'>
-      <p class='title'>Session</p>
-      <p class='timer'>25</p>
-    </div>
-<div class='timers'>
+    <div class="container" style="text-align: center;">
+      <select name="task" id="id_task" class="custom-select">
+        <option value="Null"> Select a Task </option>
+        {% for task in tasks %}
+         <option value="{{task.id}}">{{task.tsk_title|capfirst}}</option>
+        {% endfor %}
+      </select>
+    </div>  
+		<div class="container pomodoro_controller_content" style="text-align: center;" >
+      <div class='clock' id='grad'>
+        <p class='title'>Pomodoro</p>
+        <p class='timer'>25</p>
+      </div>
+      <div class='timers'>
 
-	<div class='break'>
+       <div class='break'>
         <p>Session Time</p>
         <div>
           <button class='in' id='minusCount'>-</button>
@@ -118,13 +46,21 @@ body{
       <div class='session'>
         <p>Long Break</p>
         <div>
-          <button class='in' id='minusBreak'>-</button>
-          <p class='in' id='break'>5</p>
-          <button class='in' id='plusBreak'>+</button>
+          <button class='in' id='minusLongBreak'>-</button>
+          <p class='in' id='long_break'>5</p>
+          <button class='in' id='plusLongBreak'>+</button>
         </div>
+      </div>
+      <div class='timers'>
+        <label class="switch">
+          <input type="checkbox" id="pomodoro_controller">
+          <span class="slider round"></span>
+        </label>  
       </div>
     </div>
 
+  </div>
+  <div class="container" style="text-align: center; margin-top: 40px;" >
     <p>To start the countdown click the clock!</p>
     <p>Pause and unpause by tapping the clock!</p>
     <p>To reset the clock, choose your new times when the clock is paused and then click the clock!</p>
@@ -132,114 +68,11 @@ body{
 
 
 
-		</div>
-	</section>
-
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
-	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+  </div>  
 
 
-	<script type="text/javascript">
-		$(document).ready(function(){
 
- var audio = $("audio")[0]; 
-  
- var countTime = 25;
- var breakTime = 5;
-  //use this to see if we can change times on pause
- var pause = false;
- var seconds = 0;
- var minutes = 25;
-  //global interval variable
- var counting;
 
- $('.timer').html(minutes + ":00");
-  
- function countdown(){
-    
-    
-    if(minutes === 0 && seconds === 1){
-      //play the sound on both
-      audio.play();
-      }
-   
-   if(minutes === 0 && seconds === 0){
-      if($('.title').text() === 'Session'){
-        $('.title').text('Break');
-        minutes = breakTime;
-        $('.timer').html(minutes + ":0" + seconds);
-      }
-      
-      else if($('.title').text() === 'Break'){
-        $('.title').text('Session');
-        minutes = countTime;
-        $('.timer').html(minutes + ":0" + seconds);
-      }
-   }
-   else{
-      if(seconds === 0){seconds = 60; minutes--}
-      seconds--;
-      if(seconds < 10){$('.timer').html(minutes + ":0" + seconds);}
-      else{
-      $('.timer').html(minutes + ":" + seconds);
-      }
-   }
-  }
-  
-  //for all, if we are paused, change our timer displays and reset text so clock is completely reset
-  $('#minusBreak').click(function(){
-    if(pause === false){
-    if(breakTime > 1){breakTime--; $("#break").html(breakTime); $('.title').text('Session'); $(".timer").html(countTime + ":00");
-       //reset times
-       seconds = 0;
-       minutes = countTime;}
-    }
-  });
-  $('#plusBreak').click(function(){
-    if(pause === false){
-    breakTime++; $("#break").html(breakTime);
-    $('.title').text('Session');
-    $(".timer").html(countTime + ":00");
-    //reset times
-       seconds = 0;
-       minutes = countTime;
-    }
-  });
-   $('#minusCount').click(function(){
-     if(pause === false){
-    if(countTime > 1){countTime--; $("#count").html(countTime); $(".timer").html(countTime + ":00");        $('.title').text('Session');
-}
-       //reset times
-       seconds = 0;
-       minutes = countTime;
-     }
-  });
-  $('#plusCount').click(function(){
-    if(pause === false){
-    countTime++; $("#count").html(countTime);
-      $(".timer").html(countTime + ":00");
-      $('.title').text('Session');
+</section>
 
-      //reset times
-      seconds = 0;
-      minutes = countTime;
-    }
-  });
-  
-  $('.clock').click(function(){
-    
-    //begin countdown function, call it every sec
-   if(pause === false){
-     counting = setInterval(countdown, 1000);
-     pause = true;
-   }
-   else if(pause === true){
-     clearInterval(counting);
-     pause = false;
-   }
-  });
-});
-	</script>
-
-</body>
-</html>
+{% endblock %}

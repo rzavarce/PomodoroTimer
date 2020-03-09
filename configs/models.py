@@ -12,6 +12,7 @@ STATUS = ((0,_('Pending')),(1,_('Done')))
 
 class Config(models.Model):
 
+	cnf_title = models.CharField(max_length=150, verbose_name=_('Nickname'), blank=True, null=True)
 
 	cnf_lap_time = models.PositiveIntegerField(verbose_name=_('Pomodoros Time'))
 
@@ -30,7 +31,8 @@ class Config(models.Model):
 
 	
 	def __str__(self):
-		return self.cnf_lap_time + " - " + cnf_time_short_brake + " - " + cnf_time_long_brake
+		#return str(self.cnf_lap_time) + " - " + str(self.cnf_time_short_brake) + " - " + str(self.cnf_time_long_brake)
+		return str(self.cnf_title)
 
 
 	class Meta:

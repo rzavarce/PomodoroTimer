@@ -1,0 +1,97 @@
+{% load static %}
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+	<title>The HTML5 Herald</title>
+	<meta name="description" content="The HTML5 Herald">
+	<meta name="author" content="SitePoint">
+
+
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+
+
+  <link href='{% static 'css/manager.css' %}' rel='stylesheet' type='text/css'>
+  <link href='{% static 'css/tomato.css' %}' rel='stylesheet' type='text/css'>
+
+
+  <audio>
+   <source src="http://www.myinstants.com/media/sounds/alert-hq.mp3"></source>
+ </audio>
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+
+  
+</head>
+
+<body>
+
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+		<div class="container">
+			<a class="navbar-brand" href="#">Pomodoro App</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item">
+						<a class="nav-link active" href="/">Home
+							<span class="sr-only">(current)</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/Start/">Manager</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/admin/">Admin</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/Contact/">Contact</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<header>
+		<div class="container conteiner_manager">
+			<h1 class="font-weight-light">Pomodoro Timer</h1>
+			<br>
+			<p class="lead">The Pomodoro Technique will provide a simple tool/process for improving productivity (your own and that of your team members)</p>
+		</div>
+	</header>
+
+	{% block content %}
+  	{% endblock %}
+
+<footer class="text-light">
+  <div class="container">
+    <div class="row">
+    	<div class="footer_message">	
+      		Development by: &nbsp<a href="https://www.linkedin.com/in/rogerzavarce/" title="Linkedin: Ing. Roger Zavarce" target="_blank"> Ing. Roger Zavarce</a>
+  		</div>
+    </div>
+  </div>
+</footer>
+
+
+
+<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
+<script type="text/javascript" src="{% static 'js/countdow_manager.js' %}"></script>
+
+
+</body>
+</html>

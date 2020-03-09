@@ -4,11 +4,12 @@ $(document).ready(function(){
   
  var countTime = 25;
  var breakTime = 5;
-  //use this to see if we can change times on pause
+ var longBreakTime = 5;
+
  var pause = false;
  var seconds = 0;
  var minutes = 25;
-  //global interval variable
+
  var counting;
 
  $('.timer').html(minutes + ":00");
@@ -21,17 +22,22 @@ $(document).ready(function(){
     if(minutes === 0 && seconds === 1){
       //play the sound on both
       audio.play();
-      }
+    }
    
    if(minutes === 0 && seconds === 0){
-      if($('.title').text() === 'Session'){
+      if($('.title').text() === 'Pomodoro'){
         $('.title').text('Break');
         minutes = breakTime;
         $('.timer').html(minutes + ":0" + seconds);
       }
       
       else if($('.title').text() === 'Break'){
-        $('.title').text('Session');
+        $('.title').text('Long Break');
+        minutes = longBreakTime;
+        $('.timer').html(minutes + ":0" + seconds);
+      }
+      else if($('.title').text() === 'Long Break'){
+        $('.title').text('Pomodoro');
         minutes = countTime;
         $('.timer').html(minutes + ":0" + seconds);
       }
@@ -49,7 +55,11 @@ $(document).ready(function(){
   //for all, if we are paused, change our timer displays and reset text so clock is completely reset
   $('#minusBreak').click(function(){
     if(pause === false){
-    if(breakTime > 1){breakTime--; $("#break").html(breakTime); $('.title').text('Session'); $(".timer").html(countTime + ":00");
+    if(breakTime > 1){
+      breakTime--; 
+      $("#break").html(breakTime); 
+      $('.title').text('Pomodoro'); 
+      $(".timer").html(countTime + ":00");
        //reset times
        seconds = 0;
        minutes = countTime;}
@@ -57,10 +67,34 @@ $(document).ready(function(){
   });
   $('#plusBreak').click(function(){
     if(pause === false){
-    breakTime++; $("#break").html(breakTime);
-    $('.title').text('Session');
-    $(".timer").html(countTime + ":00");
+      breakTime++; 
+      $("#break").html(breakTime);
+      $('.title').text('Pomodoro');
+      $(".timer").html(countTime + ":00");
     //reset times
+       seconds = 0;
+       minutes = countTime;
+    }
+  });
+  $('#minusLongBreak').click(function(){
+    if(pause === false){
+    if(longBreakTime > 1){
+      longBreakTime--; 
+      $("#long_break").html(longBreakTime); 
+      $('.title').text('Pomodoro'); 
+      $(".timer").html(countTime + ":00");
+       //reset times
+       seconds = 0;
+       minutes = countTime;}
+    }
+  });
+  $('#plusLongBreak').click(function(){
+    if(pause === false){
+      longBreakTime++; 
+      $("#long_break").html(longBreakTime);
+      $('.title').text('Pomodoro');
+      $(".timer").html(countTime + ":00");
+      //reset times
        seconds = 0;
        minutes = countTime;
     }
@@ -71,7 +105,7 @@ $(document).ready(function(){
           countTime--; 
           $("#count").html(countTime); 
           $(".timer").html(countTime + ":00");        
-          $('.title').text('Session');
+          $('.title').text('Pomodoro');
         }
        //reset times
        seconds = 0;
@@ -82,7 +116,7 @@ $(document).ready(function(){
     if(pause === false){
     countTime++; $("#count").html(countTime);
       $(".timer").html(countTime + ":00");
-      $('.title').text('Session');
+      $('.title').text('Pomodoro');
 
       //reset times
       seconds = 0;
@@ -107,7 +141,7 @@ $(document).ready(function(){
 
   //FUNCTION ACTIVE POMODORO IF A TASK PENDINT EXISTS
   $('#id_task').change(function(){
-    console.log($('#id_task').val());
+    //console.log($('#id_task').val());
    if($('#id_task').val()=="Null"){
       
       $("#pomodoro_controller").prop('checked', false);
@@ -116,7 +150,7 @@ $(document).ready(function(){
       if(countTime > 1){
           $("#count").html(countTime); 
           $(".timer").html(countTime + ":00");        
-          $('.title').text('Session');
+          $('.title').text('Pomodoro');
         }
        //reset times
        seconds = 0;
@@ -127,14 +161,55 @@ $(document).ready(function(){
          pause = false;
        }
 
-
-      console.log('ssssssss');
+      //console.log('ssssssss');
 
    }else{
       console.log('zzzzzzz');
       $(".pomodoro_controller_content").show( "slow" );
+      config_setting();
+
    }
   });
+
+
+//FUNCTION API TASK CONTROLER
+function config_setting() {
+  task_active = $("#id_task").val()
+  $.ajax({
+    url : "http://localhost:8000/tasks/"+task_active,
+    dataType: "json",
+    success : function (data) {
+
+        console.log(data['tsk_config']['cnf_lap_time']);
+
+        countTime = data['tsk_config']['cnf_lap_time']
+
+        if(countTime > 0){
+          $("#count").html(countTime); 
+          $(".timer").html(countTime + ":00");        
+          $('.title').text('Pomodoro');
+        }
+
+        breakTime = data['tsk_config']['cnf_time_short_brake']
+        $("#break").html(data['tsk_config']['cnf_time_short_brake']);
+
+
+        longBreakTime = data['tsk_config']['cnf_time_long_brake']
+        $("#long_break").html(data['tsk_config']['cnf_time_long_brake']);
+
+
+        //reset times
+        seconds = 0;
+        minutes = countTime;
+
+        $('#pomodoro_controller').prop('checked', false);
+
+      }
+   });
+}
+
+
+
 
 
 //FUNCTION API TASK CONTROLER
@@ -151,7 +226,7 @@ $(document).ready(function(){
           $("#id_task").empty().append(firstOption);
 
           $.each(data['results'], function(i, item) {
-              console.log(item);
+              //console.log(item);
 
               if(item.id == task_active){
                 $("#id_task").append('<option value="'+ item.id +'" selected>'+ item.tsk_title +'</option>')

@@ -13,14 +13,14 @@ or Download:
 	python3 manage.py runserver
 
 
-Description:
+Description:<br><br>
 
-Pomodoro Timer is in Manager page.
-Task Lisi is in Task List page.
-Backend in Admin page.
-I used Bootstrap 4, Django 2.15, SQLlite, Rest/API Framework, Jquery And Other Libs.
-I generate the translation setting (Incomplete).
-I develoment a contact page to send email to the admin user too.
-Extends Templete is used in alls User Interface.
+Pomodoro Timer is in Manager page.<br>
+Task Lisi is in Task List page.<br>
+Backend in Admin page.<br>
+I used Bootstrap 4, Django 2.15, SQLlite, Rest/API Framework, Jquery And Other Libs.<br>
+I generate the translation setting (Incomplete).<br>
+I develoment a contact page to send email to the admin user too.<br>
+Extends Templete is used in alls User Interface.<br>
 Etc.
 

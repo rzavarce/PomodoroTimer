@@ -33,7 +33,9 @@ h3{
 .timers{
   width: 560px;
   text-align: center;
-  margin: 40px 20px 40px -30px;
+  /*margin: 40px 20px 40px -30px;*/
+  margin: 40px auto 40px auto;
+
 }
 
 .timers div{

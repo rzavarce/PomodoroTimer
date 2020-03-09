@@ -13,7 +13,7 @@ or Download:
 	python3 manage.py runserver
 
 
-Description:<br><br>
+<b>Description:</b><br>
 
 Pomodoro Timer is in Manager page.<br>
 Task Lisi is in Task List page.<br>
